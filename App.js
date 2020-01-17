@@ -14,6 +14,9 @@ import {
   View,
   Text,
   StatusBar,
+  FlatList,
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 
 import {
@@ -23,56 +26,49 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import 'react-native-gesture-handler';
+import { createAppContainer, StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import Chat from './components/Chat';
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+const AppNavigator = createStackNavigator(
+  {
+    Home: Chat
+  },
+  {
+    initialRouteName: 'Home',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#075E54',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  }
+);
 
+// const AppContainer = createAppContainer(AppNavigator);
+export default createAppContainer(AppNavigator);
+
+
+
+
+
+const offset = 24;
 const styles = StyleSheet.create({
+  nameInput: { // 3. <- Add a style for the input
+    height: offset * 2,
+    margin: offset,
+    paddingHorizontal: offset,
+    borderColor: '#111111',
+    borderWidth: 1,
+  },
+  buttonText: { // 5.
+    marginLeft: offset,
+    fontSize: offset,
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
@@ -111,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+// export default App;
