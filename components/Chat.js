@@ -10,7 +10,8 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackgrounds,
-  Image
+  Image,
+  Keyboard
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
@@ -53,7 +54,7 @@ class Chat extends React.Component {
                 alignSelf: 'flex-start',
                 margin: 10,
                 fontSize: 16,
-                padding: 5,
+                padding: 10,
                 maxWidth: 300,
                 backgroundColor: '#FFFFFF'
             }
@@ -65,7 +66,7 @@ class Chat extends React.Component {
                 alignSelf: 'flex-end',
                 margin: 10,
                 fontSize: 16,
-                padding: 5,
+                padding: 10,
                 maxWidth: 300,
                 backgroundColor: '#DCF8C6'
             }
@@ -80,6 +81,24 @@ class Chat extends React.Component {
         // }, function(){
 
         // });
+    }
+
+    onPress = () => {
+        if(this.state.enteredText!="") {
+            this.setState({
+                enteredText: "",
+                messages: [...this.state.messages, { "incoming": false, "message": this.state.enteredText }]
+            });
+        }
+        Keyboard.dismiss();
+    }
+
+    sendText = function() {
+        console.log('messages ', this.state.messages);
+        // this.setState({
+        //     messages: [...this.state.messages, { "incoming": false, "message": this.state.enteredText }]
+        // });
+        // this.state.messages.push({ "incoming": false, "message": this.state.enteredText })
     }
 
     render() {
@@ -101,7 +120,7 @@ class Chat extends React.Component {
                         value={this.state.enteredText}
                         onChangeText={(enteredText) => this.setState({enteredText}) } 
                         placeholder='Type a message' />
-                    <TouchableOpacity style={ styles.sendButton } >
+                    <TouchableOpacity style={ styles.sendButton } onPress={ this.onPress } >
                         <Image
                             source= {require('../assets/send.png')}
                             style={ styles.sendIcon } />
