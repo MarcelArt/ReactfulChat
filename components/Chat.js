@@ -114,7 +114,7 @@ class Chat extends React.Component {
                     }
                     keyExtractor={(item, index) => (`message-${index}`)} />
                 {/* <Text>Text</Text> */}
-                <View style={{ flexDirection: 'row' }} >
+                <View style={{ flexDirection: 'row', marginTop: 10 }} >
                     <TextInput
                         style={ styles.textBox }
                         value={this.state.enteredText}
@@ -134,7 +134,8 @@ class Chat extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'transparent',
-        padding: 20
+        padding: 20,
+        marginBottom: 10
     },
     textBox: {
         margin: 10,
